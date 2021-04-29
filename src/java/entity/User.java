@@ -7,24 +7,22 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,7 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByImage", query = "SELECT u FROM User u WHERE u.image = :image"),
-    @NamedQuery(name = "User.findByCity", query = "SELECT u FROM User u WHERE u.city = :city"),
     @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByWebsiteLink", query = "SELECT u FROM User u WHERE u.websiteLink = :websiteLink"),
@@ -51,7 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByIsPlaced", query = "SELECT u FROM User u WHERE u.isPlaced = :isPlaced"),
     @NamedQuery(name = "User.findByGitLink", query = "SELECT u FROM User u WHERE u.gitLink = :gitLink"),
     @NamedQuery(name = "User.findByLinkedinLink", query = "SELECT u FROM User u WHERE u.linkedinLink = :linkedinLink"),
-    @NamedQuery(name = "User.findByCreatedDate", query = "SELECT u FROM User u WHERE u.createdDate = :createdDate")})
+    @NamedQuery(name = "User.findByCreatedDate", query = "SELECT u FROM User u WHERE u.createdDate = :createdDate"),
+    @NamedQuery(name = "User.findByIsVerified", query = "SELECT u FROM User u WHERE u.isVerified = :isVerified"),
+    @NamedQuery(name = "User.findByCompanyname", query = "SELECT u FROM User u WHERE u.companyname = :companyname")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,17 +60,17 @@ public class User implements Serializable {
     @Column(name = "Id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 25)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 25)
     @Column(name = "password")
     private String password;
@@ -79,18 +78,13 @@ public class User implements Serializable {
     @Column(name = "image")
     private String image;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 25)
-    @Column(name = "city")
-    private String city;
-    @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 100)
     @Column(name = "address")
     private String address;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 100)
     @Column(name = "email")
     private String email;
@@ -103,13 +97,14 @@ public class User implements Serializable {
     @Size(max = 10)
     @Column(name = "gender")
     private String gender;
+    @Size(max = 10)
     @Column(name = "contact")
-    private Integer contact;
+    private String contact;
     @Column(name = "dob")
     @Temporal(TemporalType.DATE)
     private Date dob;
     @Column(name = "isPlaced")
-    private Boolean isPlaced;
+    private boolean isPlaced;
     @Size(max = 100)
     @Column(name = "gitLink")
     private String gitLink;
@@ -117,28 +112,20 @@ public class User implements Serializable {
     @Column(name = "linkedinLink")
     private String linkedinLink;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "createdDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Skills> skillsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Projects> projectsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Experiencedetail> experiencedetailList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyId")
-    private List<Jobinerviews> jobinerviewsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Jobinerviews> jobinerviewsList1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Educationdetail> educationdetailList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyId")
-    private List<Requestinterviewdates> requestinterviewdatesList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private List<Usersgroup> usersgroupList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private List<Userstechnology> userstechnologyList;
+    @Basic(optional = false)
+    //@NotNull
+    @Column(name = "isVerified")
+    private boolean isVerified;
+    @Size(max = 1000)
+    @Column(name = "companyname")
+    private String companyname;
+    @JoinColumn(name = "cityId", referencedColumnName = "Id")
+    @ManyToOne(optional = false)
+    private City cityId;
 
     public User() {
     }
@@ -147,15 +134,15 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String name, String username, String password, String city, String address, String email, Date createdDate) {
+    public User(Integer id, String name, String username, String password, String address, String email, Date createdDate, boolean isVerified) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
-        this.city = city;
         this.address = address;
         this.email = email;
         this.createdDate = createdDate;
+        this.isVerified = isVerified;
     }
 
     public Integer getId() {
@@ -198,14 +185,6 @@ public class User implements Serializable {
         this.image = image;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -246,11 +225,11 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public Integer getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(Integer contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 
@@ -262,11 +241,11 @@ public class User implements Serializable {
         this.dob = dob;
     }
 
-    public Boolean getIsPlaced() {
+    public boolean getIsPlaced() {
         return isPlaced;
     }
 
-    public void setIsPlaced(Boolean isPlaced) {
+    public void setIsPlaced(boolean isPlaced) {
         this.isPlaced = isPlaced;
     }
 
@@ -286,7 +265,7 @@ public class User implements Serializable {
         this.linkedinLink = linkedinLink;
     }
 
-    public Date getCreatedDate() {
+        public Date getCreatedDate() {
         return createdDate;
     }
 
@@ -294,85 +273,28 @@ public class User implements Serializable {
         this.createdDate = createdDate;
     }
 
-    @XmlTransient
-    public List<Skills> getSkillsList() {
-        return skillsList;
+    public boolean getIsVerified() {
+        return isVerified;
     }
 
-    public void setSkillsList(List<Skills> skillsList) {
-        this.skillsList = skillsList;
+    public void setIsVerified(boolean isVerified) {
+        this.isVerified = isVerified;
     }
 
-    @XmlTransient
-    public List<Projects> getProjectsList() {
-        return projectsList;
+    public String getCompanyname() {
+        return companyname;
     }
 
-    public void setProjectsList(List<Projects> projectsList) {
-        this.projectsList = projectsList;
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
     }
 
-    @XmlTransient
-    public List<Experiencedetail> getExperiencedetailList() {
-        return experiencedetailList;
+    public City getCityId() {
+        return cityId;
     }
 
-    public void setExperiencedetailList(List<Experiencedetail> experiencedetailList) {
-        this.experiencedetailList = experiencedetailList;
-    }
-
-    @XmlTransient
-    public List<Jobinerviews> getJobinerviewsList() {
-        return jobinerviewsList;
-    }
-
-    public void setJobinerviewsList(List<Jobinerviews> jobinerviewsList) {
-        this.jobinerviewsList = jobinerviewsList;
-    }
-
-    @XmlTransient
-    public List<Jobinerviews> getJobinerviewsList1() {
-        return jobinerviewsList1;
-    }
-
-    public void setJobinerviewsList1(List<Jobinerviews> jobinerviewsList1) {
-        this.jobinerviewsList1 = jobinerviewsList1;
-    }
-
-    @XmlTransient
-    public List<Educationdetail> getEducationdetailList() {
-        return educationdetailList;
-    }
-
-    public void setEducationdetailList(List<Educationdetail> educationdetailList) {
-        this.educationdetailList = educationdetailList;
-    }
-
-    @XmlTransient
-    public List<Requestinterviewdates> getRequestinterviewdatesList() {
-        return requestinterviewdatesList;
-    }
-
-    public void setRequestinterviewdatesList(List<Requestinterviewdates> requestinterviewdatesList) {
-        this.requestinterviewdatesList = requestinterviewdatesList;
-    }
-
-    @XmlTransient
-    public List<Usersgroup> getUsersgroupList() {
-        return usersgroupList;
-    }
-
-    public void setUsersgroupList(List<Usersgroup> usersgroupList) {
-        this.usersgroupList = usersgroupList;
-    }
-
-    @XmlTransient
-    public List<Userstechnology> getUserstechnologyList() {
-        return userstechnologyList;
-    }
-
-    public void setUserstechnologyList(List<Userstechnology> userstechnologyList) {
-        this.userstechnologyList = userstechnologyList;
+    public void setCityId(City cityId) {
+        this.cityId = cityId;
     }
 
     @Override

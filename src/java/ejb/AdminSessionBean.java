@@ -6,6 +6,7 @@
 package ejb;
 
 import entity.User;
+import entity.Usersgroup;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,13 +24,18 @@ public class AdminSessionBean implements AdminSessionBeanLocal {
     EntityManager em;
     
     @Override
-    public List<User> getAllStudents() {
+    public List<Usersgroup> getAllStudents() {
         return em.createNamedQuery("Usersgroup.findByGroupId").setParameter("groupId", 2).getResultList();
     }
 
     @Override
-    public List<User> getAllCompanies() {
-        return em.createNamedQuery("Usersgroup.findByGroupId").setParameter("groupId", 3).getResultList();
+    public List<Usersgroup> getAllCompanies() {
+        return em.createNamedQuery("Usersgroup.findVerifiedCompany").setParameter("groupId", 3).getResultList();
+    }
+
+    @Override
+    public List<Usersgroup> getCompanyRequest() {
+        return em.createNamedQuery("Usersgroup.findRequestCompany").setParameter("groupId", 3).getResultList();
     }
 
 }

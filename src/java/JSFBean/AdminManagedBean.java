@@ -7,18 +7,21 @@ package JSFBean;
 
 import ejb.AdminSessionBeanLocal;
 import entity.User;
+import entity.Usersgroup;
+import java.io.Serializable;
 import java.util.*;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author abhishek jariwala
  */
 @Named(value = "adminManagedBean")
-@RequestScoped
-public class AdminManagedBean {
+@SessionScoped
+public class AdminManagedBean implements Serializable{
 
     @EJB
     private AdminSessionBeanLocal adminSessionBean;
@@ -30,12 +33,16 @@ public class AdminManagedBean {
     public AdminManagedBean() {
     }
     
-    public List<User> allStudents(){
+    public List<Usersgroup> allStudents(){
         return this.adminSessionBean.getAllStudents();
     }
     
-    public List<User> allCompanies(){
+    public List<Usersgroup> allCompanies(){
         return this.adminSessionBean.getAllCompanies();
+    }
+    
+    public List<Usersgroup> companyRequest(){
+        return this.adminSessionBean.getCompanyRequest();
     }
     
     

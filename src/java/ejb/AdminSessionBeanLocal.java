@@ -6,6 +6,7 @@
 package ejb;
 
 import entity.User;
+import entity.Usersgroup;
 import java.util.*;
 import javax.ejb.Local;
 
@@ -15,7 +16,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface AdminSessionBeanLocal {
-    public List<User> getAllStudents();
-    public List<User> getAllCompanies();        
+    public List<Usersgroup> getAllStudents();
+    public List<Usersgroup> getAllCompanies();
+    public List<Usersgroup> getCompanyRequest();        
+
 
 }
