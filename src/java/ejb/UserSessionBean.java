@@ -26,11 +26,13 @@ public class UserSessionBean implements UserSessionBeanLocal {
         return em.createNamedQuery("State.findAll").getResultList();
     }
     
+    @Override
     public List<City> stateCity(int cityId){
         State s = em.find(State.class, cityId);
         return em.createNamedQuery("City.findByState").setParameter("stateId", s).getResultList();
     }
     
+    @Override
     public void registerUser(User u,int groupId){
         System.out.println("yup="+u.getAddress());
         em.persist(u);

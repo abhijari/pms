@@ -45,6 +45,12 @@ public class AdminManagedBean implements Serializable{
         return this.adminSessionBean.getCompanyRequest();
     }
     
+    public void updateRequest(boolean isAccept,int userid){
+        System.out.println("is="+isAccept);        
+        System.out.println(userid);
+        
+       this.adminSessionBean.updateRequest(userid, isAccept);
+    }
     
     
 }

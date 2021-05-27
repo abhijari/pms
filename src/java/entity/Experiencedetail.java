@@ -39,7 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Experiencedetail.findByLeavingDate", query = "SELECT e FROM Experiencedetail e WHERE e.leavingDate = :leavingDate"),
     @NamedQuery(name = "Experiencedetail.findByJobTitle", query = "SELECT e FROM Experiencedetail e WHERE e.jobTitle = :jobTitle"),
     @NamedQuery(name = "Experiencedetail.findByCompanyName", query = "SELECT e FROM Experiencedetail e WHERE e.companyName = :companyName"),
-    @NamedQuery(name = "Experiencedetail.findByDescription", query = "SELECT e FROM Experiencedetail e WHERE e.description = :description")})
+    @NamedQuery(name = "Experiencedetail.findByDescription", query = "SELECT e FROM Experiencedetail e WHERE e.description = :description"),
+    @NamedQuery(name = "Experiencedetail.findByStudentId", query = "SELECT e FROM Experiencedetail e WHERE e.studentId.id = :userId")})
+
 public class Experiencedetail implements Serializable {
 
     private static final long serialVersionUID = 1L;

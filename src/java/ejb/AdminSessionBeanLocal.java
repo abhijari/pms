@@ -5,8 +5,12 @@
  */
 package ejb;
 
+import entity.Educationdetail;
+import entity.Experiencedetail;
+import entity.Projects;
 import entity.User;
 import entity.Usersgroup;
+import entity.Userstechnology;
 import java.util.*;
 import javax.ejb.Local;
 
@@ -16,9 +20,23 @@ import javax.ejb.Local;
  */
 @Local
 public interface AdminSessionBeanLocal {
-    public List<Usersgroup> getAllStudents();
-    public List<Usersgroup> getAllCompanies();
-    public List<Usersgroup> getCompanyRequest();        
 
+    public List<Usersgroup> getAllStudents();
+    public void addStudent(User data);
+    public void updateStudent(int userId,User data);
+    public void deleteStudent(int userId);
+    public List<Educationdetail> getAllEducationDetail(int userId); 
+    public List<Experiencedetail> getAllExperienceDetail(int userId); 
+    public List<Projects> getAllProjects(int userId);
+    public List<Userstechnology> getAllStudentTechnology(int userId);  
+    
+    public List<Usersgroup> getCompanyRequest();
+    public List<Usersgroup> getAllCompanies();
+    public List<Userstechnology> getAllCompanyTechnology(int userId);        
+    public void addCompany(User data);
+    public void updateCompany(int userId,User data);
+    public void deleteDelete(int userId);
+    public void updateRequest(int userId,boolean isVerified);
+    
 
 }

@@ -1,8 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
 
         <title>:: Lucid HR :: Profile</title>
 
@@ -17,16 +20,23 @@
         <meta name="author" content="WrapTheme, design by: ThemeMakker.com" />
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- VENDOR CSS -->
+<!--          <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>-->
         <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+        <link rel="stylesheet" href="../assets/vendor/multi-select/css/multi-select.css"/>
+        <link rel="stylesheet" href="../assets/vendor/select2/select2.css" />
+        <link rel="stylesheet" href="../assets/css/multi-selector.css" />
+
+
+
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../assets/css/main.css" />
         <link rel="stylesheet" href="../assets/css/blog.css" />
         <link rel="stylesheet" href="../assets/css/color_skins.css" />
         <link rel="stylesheet" href="../assets/css/avtar.css" />
-        <link rel="stylesheet" href="../assets/vendor/dropify/css/dropify.min.css" />
-        <link rel="stylesheet" href="../assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+<!--        <link rel="stylesheet" href="../assets/vendor/dropify/css/dropify.min.css" />
+        <link rel="stylesheet" href="../assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />-->
         
         <style>
             #removebtn {
@@ -45,7 +55,7 @@
                 right: 0px;
             }
         </style>
-    </head>
+    </h:head>
 
     <body class="theme-orange">
         <!-- Page Loader -->
@@ -217,13 +227,13 @@
 
                                 <ul class="main-menu metismenu">
 
-                                    <li><a href="index.html"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
+                                    <li ><a href="dashboard.xhtml"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
 
-                                    <li class="active"><a href="page-profile2.html"><i class="icon-user" /><span>Profile</span></a></li>
+                                    <li class="active"><a href="profile.xhtml"><i class="icon-user" /><span>Profile</span></a></li>
 
-                                    <li> <a href="client-list.html"><i class="icon-diamond" />Companies</a></li>
+                                    <li > <a href="company.xhtml"><i class="icon-diamond" />Companies</a></li>
 
-                                    <li> <a href="emp-all.html"><i class="icon-users" />Interviews</a></li>
+                                    <li> <a href="interview.xhtml"><i class="icon-users" />Interviews</a></li>    
                                 </ul></nav></div>
                     </div>
                 </div>
@@ -257,84 +267,100 @@
                 <div class="row clearfix">
 
                     <div class="card">
+                    <h:form enctype="multipart/form-data">
 
                         <div class="header">
 
-                            <h2>Personal Information</h2>
+                            <h2>Personal Information
+                                <h:commandButton id="submit" action="#{studentManagedBean.updateProfile()}" value="Update" style="float:right" class="btn btn-primary"/>
+                            </h2>
+                            
+
                         </div>
 
                         <div class="body">
                             <small class="text-muted">Profile pic: </small>
+                            
                             <input type="file" id="dropify-event" data-default-file="" />
+<!--                            <h:inputFile value="#{studentManagedBean.profilePic}" id="dropify-event" />-->
                             <small class="text-muted">Name: </small>
-                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="sname" />
+<!--                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="sname" disabled="disabled"/>-->
+                            <h:inputText value="#{studentManagedBean.name}" class="form-control" disabled="true"/>
+
                             <small class="text-muted">User name: </small>
-                            <input type="text" class="form-control" disabled="disabled" aria-label="username" aria-describedby="basic-addon1" id="suname" />
+                            <h:inputText value="#{studentManagedBean.username}" class="form-control" disabled="true"/>
                             <small class="text-muted">Address: </small>
-                            <textarea class="form-control" rows="5" cols="30" required="">795 Folsom Ave, Suite 600 San Francisco, 94107</textarea>
+                            <h:inputTextarea rows="5" value="#{studentManagedBean.address}" class="form-control"/>
 
                             <hr />
                             <small class="text-muted">Email address: </small>
-                            <input type="email" class="form-control" required="" disabled="disabled" />
+                            <h:inputText value="#{studentManagedBean.email}" class="form-control" disabled="true"/>
 
                             <hr />
                             <small class="text-muted">Mobile: </small>
-                            <input type="number" class="form-control" required="" />
+                            <h:inputText value="#{studentManagedBean.contact}" class="form-control" disabled="true"/>
 
                             <hr />
                             <small class="text-muted">Gender: </small>
 
                             <div class="form-group">
-                                <label class="fancy-radio">
+                                <h:selectOneRadio value="#{studentManagedBean.gender}" disabled="true">
+                                    <f:selectItem itemValue = "male" itemLabel = "male" /> 
+                                    <f:selectItem itemValue = "female" itemLabel = "female" />
+                                </h:selectOneRadio>
+<!--                                <label class="fancy-radio">
                                     <input type="radio" name="gender" value="male" required="" data-parsley-errors-container="#error-radio" />
                                     <span><i />Male</span>
                                 </label>
                                 <label class="fancy-radio">
                                     <input type="radio" name="gender" value="female" />
                                     <span><i />Female</span>
-                                </label>
+                                </label>-->
                             </div>
 
                             <hr />
                             <small class="text-muted">Birth Date: </small>
-                            <input type="text" class="form-control" id="datepicker" />
+                            <h:inputText value="#{studentManagedBean.dob}" class="form-control" disabled="true"/>
 
                             <hr />
                             <small class="text-muted">Description: </small>
-                            <textarea class="form-control" rows="5" cols="30" required="" placeholder="About yourself..." />
+                            <h:inputTextarea rows="5" value="#{studentManagedBean.description}" class="form-control"/>
 
                             <hr />
                             <small class="text-muted">Social: </small>
 
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-linkedin  m-r-5" /></span>
-                                <input type="text" class="form-control" required="" placeholder=" linkedin.com/example" />
+                                <h:inputText value="#{studentManagedBean.linkedinLink}" class="form-control" />
                             </div>
 
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-github  m-r-5" /></span>
-                                <input type="text" class="form-control" required="" placeholder=" github.com/example" />
+                                <h:inputText value="#{studentManagedBean.gitLink}" class="form-control" />
                             </div>
 
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-globe  m-r-5" /></span>
-                                <input type="text" class="form-control" required="" placeholder=" website.com/example" />
+                                <h:inputText value="#{studentManagedBean.websiteLink}" class="form-control" />
                             </div>
                         </div>
-                    </div>
+                                            </h:form>
 
+                    </div>
                     <div class="card">
 
+                        <h:form>
                         <div class="header">
 
                             <h2>Skills</h2>
+                            <h:commandButton id="submit" action="#{studentManagedBean.saveTechnology()}" value="Save" class="btn btn-primary"/>
+
                         </div>
-                        <form id="basic-form" method="post" novalidate="">
 
                             <div class="form-group">
 
                                 <div class="body" id="dynamic_form">
-                                    <select id="tech" name="tech[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required="" data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-multiselect">
+<!--                                    <select id="tech" name="tech[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required="" data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-multiselect">
 
                                         <option value="cheese">Cheese</option>
 
@@ -347,19 +373,71 @@
                                         <option value="pepperoni">Pepperoni</option>
 
                                         <option value="onions">Onions</option>
-                                    </select>
+                                    </select>-->
+                                    
+<!--                                    <select id='keep-order' multiple='multiple'>
+                                        <option value='elem_1'>elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                       
+                                        <option value='elem_100'>elem 100</option>
+                                     </select>-->
+
+                                    <h:selectManyCheckbox value = "#{studentManagedBean.userTechnologies}">
+                                        <c:forEach var="tech" items="#{studentManagedBean.allTechnology()}">
+                                            <f:selectItem itemValue = "#{tech.id}" itemLabel = "#{tech.name}" />
+                                        </c:forEach>
+                                    </h:selectManyCheckbox>
                                 </div>
                             </div>
-                        </form>
+                        </h:form>
                     </div>
-
+                    <h:form>
+                        <h:commandLink class="btn btn-primary" id="remainingDays" value="#{studentManagedBean.ff}" onclick="$('#largeModal').modal('show');">
+                            <p:ajax listener="#{studentManagedBean.ss}" update=":eduform" event="click"></p:ajax>
+                        </h:commandLink>
+                        <h:outputLabel id="remainingDaysd" value="#{studentManagedBean.ff}"  />
+                    </h:form>
                     <div class="card">
 
                         <div class="header">
 
-                            <h2>Eduction Details<a href="#largeModal" data-toggle="modal" data-target="#largeModal">
-                                    Add</a>
+                            <h2>Eduction Details
+<!--                                <a href="#largeModal" data-toggle="modal" data-target="#largeModal">
+                                      Add</a>-->
+                                <h:commandLink class="btn btn-primary" id="eduAdd" value="Add" onclick="$('#largeModal').modal('show');">
+                                    <p:ajax listener="#{studentManagedBean.addEducationPrompt()}" update=":eduform" event="click"></p:ajax>
+                        </h:commandLink>
                             </h2>
+                            <h:form>
+                             <div class="body">
+                                 <c:forEach var="edu" items="#{studentManagedBean.getEducationDetail()}">
+                                <div class="list-group">
+
+                                    <div href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">#{edu.degreeName}</h5>
+                                        <small class="text-muted">
+                                            <h:commandLink class="btn btn-primary" id="remainingDays2" value="Edit" onclick="$('#largeModal').modal('show');">
+                                                <p:ajax listener="#{studentManagedBean.editEducationdetail(edu.id)}" update=":eduform" event="click"></p:ajax>
+                                            </h:commandLink>
+                                            &nbsp;
+                                            <h:commandButton action="#{studentManagedBean.deleteEducationdetail(edu.id)}" value="Delete" class="btn btn-danger"/>
+
+                                        </small>
+                                        </div>
+                                        <p class="mb-1">universityName : #{edu.universityName}</p>
+                                        <p class="mb-1">year : #{edu.year}</p>
+                                        <p class="mb-1">percentage : #{edu.percentage}</p>
+                                        <p class="mb-1">cgpa : #{edu.cgpa}</p>
+<!--                                        <small class="text-muted">Donec id elit non mi porta.</small>-->
+                                    </div>
+
+                                </div>
+                                </c:forEach>
+                            </div>
+                            </h:form>
                         </div>
                     </div>
 
@@ -367,8 +445,42 @@
 
                         <div class="header">
 
-                            <h2>Experience Details<a href="#largeModal1" data-toggle="modal" data-target="#largeModal1">
-                                    Add</a> </h2>
+                            <h2>Experience Details
+<!--                                <a href="#largeModal1" data-toggle="modal" data-target="#largeModal1">
+                                    Add</a> -->
+                            <h:commandLink class="btn btn-primary" id="expAdd" value="Add" onclick="$('#largeModal1').modal('show');">
+                                <p:ajax listener="#{studentManagedBean.addExperiencePrompt()}" update=":expform" event="click"></p:ajax>
+                        </h:commandLink>
+                            </h2>
+                             <h:form>
+                             <div class="body">
+                                 <c:forEach var="exp" items="#{studentManagedBean.getExperience()}">
+                                <div class="list-group">
+
+                                    <div href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">#{exp.companyName}</h5>
+                                        <small class="text-muted">
+                                            <h:commandLink class="btn btn-primary" id="remainingDays3" value="Edit" onclick="$('#largeModal1').modal('show');">
+                                                <p:ajax listener="#{studentManagedBean.editExperiencedetail(exp.id)}" update=":expform" event="click"></p:ajax>
+                                            </h:commandLink>
+                                            &nbsp;
+<!--                                            <h:commandButton action="#{studentManagedBean.editExperiencedetail(exp.id)}" value="Edit" class="btn btn-primary"/>&nbsp;-->
+                                            <h:commandButton action="#{studentManagedBean.deleteExperiencedetail(exp.id)}" value="Delete" class="btn btn-danger"/>
+
+                                        </small>
+                                        </div>
+                                        <p class="mb-1">jobTitle : #{exp.jobTitle}</p>
+                                        <p class="mb-1">joinedDate : #{exp.joinedDate}</p>
+                                        <p class="mb-1">leavingDate : #{exp.leavingDate}</p>
+                                        <p class="mb-1">detail : #{exp.description}</p>
+                                        
+                                    </div>
+
+                                </div>
+                                </c:forEach>
+                            </div>
+                            </h:form>
                         </div>
                     </div>
 
@@ -376,8 +488,38 @@
 
                         <div class="header">
 
-                            <h2>Project Details<a href="#largeModal2" data-toggle="modal" data-target="#largeModal2">
-                                    Add</a> </h2>
+                            <h2>Project Details
+<!--                                <a href="#largeModal2" data-toggle="modal" data-target="#largeModal2">
+                                    Add</a> -->
+                        <h:commandLink class="btn btn-primary" id="proAdd" value="Add" onclick="$('#largeModal2').modal('show');">
+                            <p:ajax listener="#{studentManagedBean.addProjectPrompt()}" update=":proform" event="click"></p:ajax>
+                        </h:commandLink>
+                            </h2>
+                            <h:form>
+                             <div class="body">
+                                 <c:forEach var="pro" items="#{studentManagedBean.getProjects()}">
+                                <div class="list-group">
+
+                                    <div href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">#{pro.title}</h5>
+                                        <small class="text-muted">
+                                            <h:commandLink class="btn btn-primary" id="remainingDays4" value="Edit" onclick="$('#largeModal2').modal('show');">
+                                                <p:ajax listener="#{studentManagedBean.editProjects(pro.id)}" update=":proform" event="click"></p:ajax>
+                                            </h:commandLink>&nbsp;
+<!--                                            <h:commandButton action="#{studentManagedBean.editProjects(pro.id)}" value="Edit" class="btn btn-primary"/>&nbsp;-->
+                                            <h:commandButton action="#{studentManagedBean.deleteProjects(pro.id)}" value="Delete" class="btn btn-danger"/>
+
+                                        </small>
+                                        </div>
+                                        <p class="mb-1">#{pro.description}</p>
+                                    </div>
+
+                                </div>
+                                </c:forEach>
+                            </div>
+                            </h:form>
+<!--                            <h:link value = "Add" outcome = "#largeModal2" p:data-toggle="modal" p:data-target="#largeModal2"/>-->
                         </div>
                     </div>
 
@@ -394,36 +536,48 @@
         <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
 
             <div class="modal-dialog modal-lg" role="document">
-
+            <h:form id="eduform">
                 <div class="modal-content">
 
                     <div class="modal-header">
 
-                        <h4 class="title" id="largeModalLabel">Eduction Details</h4>
+                        <h4 class="title" id="largeModalLabel">#{studentManagedBean.eduttl} Eduction Details</h4>
                     </div>
 
                     <div class="modal-body">
-
+                        
                         <div class="body" id="dynamic_form">
+                            <h:inputHidden value="#{studentManagedBean.edubtn}" class="userId-class"/>
+                            <h:inputHidden value="#{studentManagedBean.eduId}" class="userId-class"/>
                             <small class="text-muted">Degree: </small>
-                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="dname" name="field_name[]" placeholder="Example-MscIT" />
+                            <h:inputText value="#{studentManagedBean.degreeName}" class="form-control"/>
+                            
                             <small class="text-muted">University-college name: </small>
-                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="cname" name="field_name[]" placeholder="Example-jpdawer" />
+                            <h:inputText value="#{studentManagedBean.universityName}" class="form-control"/>
                             <small class="text-muted">Year of passing: </small>
-                            <select name="field_name[]" class="form-control" id="dropdownYear" style="width: 120px;">
-                            </select>
+                            <h:selectOneMenu value="#{studentManagedBean.year}" class="form-control" style="width: 120px;">
+                                <f:selectItem itemLabel="Select Year"/>
+                                <f:selectItems value="#{studentManagedBean.years}" var="c" itemValue="#{c}" itemLabel="#{c}" />
+
+                            </h:selectOneMenu>
+                            
+<!--                            <select name="field_name[]" class="form-control" id="dropdownYear" style="width: 120px;">
+                            </select>-->
                             <small class="text-muted">Percentage: </small>
-                            <input type="number" name="field_name[]" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="per" />
+                            <h:inputText value="#{studentManagedBean.percentage}" class="form-control"/>
+                           
                             <small class="text-muted">CGPI: </small>
-                            <input type="number" class="form-control" name="field_name[]" min="1" max="10" step="any" aria-label="name" aria-describedby="basic-addon1" id="cgpi" placeholder="Between 1 to 10" />
+                            <h:inputText value="#{studentManagedBean.cgpa}" class="form-control"/>
                         </div>
+                        
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">SAVE CHANGES</button>
+                        <h:commandButton id="submit" action="#{studentManagedBean.addEducation()}" value="#{studentManagedBean.edubtn}" class="btn btn-primary"/>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
                     </div>
                 </div>
+            </h:form>
             </div>
         </div>
         <!-- LARGE MODEL FOR Experience Details -->
@@ -432,38 +586,44 @@
 
             <div class="modal-dialog modal-lg" role="document">
 
+                <h:form id="expform">
                 <div class="modal-content">
 
                     <div class="modal-header">
 
-                        <h4 class="title" id="largeModalLabel">Experience Details</h4>
+                        <h4 class="title" id="largeModalLabel">#{studentManagedBean.expttl} Experience Details</h4>
                     </div>
 
                     <div class="modal-body">
-
+                            
                         <div class="body" id="dynamic_form">
+                            <h:inputHidden value="#{studentManagedBean.expbtn}" class="userId-class"/>
+                            <h:inputHidden value="#{studentManagedBean.expId}" class="userId-class"/>
                             <small class="text-muted">Job title: </small>
-                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="jtitle" placeholder="Example-web developer" />
+                            <h:inputText value="#{studentManagedBean.jobTitle}" class="form-control"/>
                             <small class="text-muted">Company name: </small>
-                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="companyName" />
+                            <h:inputText value="#{studentManagedBean.companyName}" class="form-control"/>
                             <small class="text-muted">Start date: </small>
-                            <input type="text" class="form-control" id="datepicker1" />
+                            <h:inputText value="#{studentManagedBean.joinedDate}" class="form-control datepicker1"/>
+                            
                             <small class="text-muted">End date: </small>
-                            <input type="text" class="form-control" id="datepicker2" />
-                            <input type="checkbox" name="checkbox" required="" data-parsley-errors-container="#error-checkbox" id="chkSelect" />
+                            <h:inputText value="#{studentManagedBean.leavingDate}" class="form-control datepicker2"/>
+                            <h:selectBooleanCheckbox id="existing" value="#{studentManagedBean.isCurrentJob}" />
+                   
                             <span>Present</span>
 
                             <hr />
                             <small class="text-muted">Description: </small>
-                            <textarea class="form-control" rows="5" cols="30" required="" placeholder="job description" />
+                            <h:inputTextarea rows="5" value="#{studentManagedBean.jobDescription}" class="form-control"/>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">SAVE CHANGES</button>
+                        <h:commandButton id="submit" action="#{studentManagedBean.addExperience()}" value="#{studentManagedBean.expbtn}" class="btn btn-primary"/>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
                     </div>
                 </div>
+                </h:form>
             </div>
         </div>
         <!-- LARGE MODEL FOR Project Details -->
@@ -471,32 +631,43 @@
         <div class="modal fade" id="largeModal2" tabindex="-1" role="dialog">
 
             <div class="modal-dialog modal-lg" role="document">
-
+            <h:form id="proform">
                 <div class="modal-content">
 
                     <div class="modal-header">
 
-                        <h4 class="title" id="largeModalLabel">Project Details</h4>
+                        <h4 class="title" id="largeModalLabel">#{studentManagedBean.prottl} Project Details</h4>
                     </div>
 
                     <div class="modal-body">
 
                         <div class="body" id="dynamic_form">
+                            <h:inputHidden value="#{studentManagedBean.probtn}" class="userId-class"/>
+                            <h:inputHidden value="#{studentManagedBean.proId}" class="userId-class"/>
                             <small class="text-muted">Project title: </small>
-                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="jtitle" placeholder="Example-xyz app, website" />
+                            <h:inputText value="#{studentManagedBean.proTitle}" class="form-control"/>
                             <small class="text-muted">Description: </small>
-                            <textarea class="form-control" rows="5" cols="30" required="" placeholder="project description" />
+                            <h:inputTextarea rows="5" value="#{studentManagedBean.proDescription}" class="form-control"/>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">SAVE CHANGES</button>
+                        <h:commandButton id="submit" action="#{studentManagedBean.addProject()}" value="#{studentManagedBean.probtn}" class="btn btn-primary"/>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
                     </div>
                 </div>
+            </h:form>
             </div>
         </div>
         <!-- Javascript -->
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>-->
+
+
+<!--        <script src="../assets/vendor/select2/select2.min.js"></script>  Select2 Js -->
+
+        <script src="../assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+
+        <script src="../assets/js/pages/forms/advanced-form-elements.js"></script>
 
         <script src="../assets/bundles/libscripts.bundle.js"></script>
 
@@ -519,7 +690,17 @@
         <script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
         <script src="../assets/bundles/mainscripts.bundle.js"></script>
+        
+<!--          <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>-->
+
+<!--            <script src="../assets/js/jquery.multi-select.js"></script>  Select2 Js -->
+
+<!--          <script type="text/javascript">
+  // run pre selected options
+            $('#keep-order').multiSelect({ keepOrder: true });
+  </script>-->
         <script>
+
 		$(function () {
 			// validation needs name of the element
 			$('#tech').multiselect();
@@ -560,14 +741,14 @@
 		});
 
 		$(function () {
-			$("#datepicker1").datepicker({
+			$(".datepicker1").datepicker({
 				numberOfMonths: 3,
 				showButtonPanel: true
 			});
 		});
 
 		$(function () {
-			$("#datepicker2").datepicker({
+			$(".datepicker2").datepicker({
 				numberOfMonths: 3,
 				showButtonPanel: true
 			});

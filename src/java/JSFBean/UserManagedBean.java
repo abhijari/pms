@@ -16,11 +16,13 @@ import java.util.List;
 import java.util.Properties;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*; 
+import javax.inject.Inject;
+import javax.security.enterprise.SecurityContext;
+import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
 /**
  *
  * @author abhishek jariwala
@@ -32,6 +34,7 @@ public class UserManagedBean implements Serializable{
     @EJB
     private UserSessionBeanLocal userSessionBean;
 
+    
     private String name,username,password,address,email,websiteLink,description,companyname,gender,gitLink,linkedinLink,contact;
     private Integer cityId,stateId;
     private Date dob;
@@ -184,14 +187,18 @@ public class UserManagedBean implements Serializable{
     public List<State> allState(){
         return userSessionBean.allStates();
     }
-    
+   
+    public void login(){
+        
+    }
     public void Register() throws IOException{
         
         User u = new User();
+        Pbkdf2PasswordHashImpl pass = new Pbkdf2PasswordHashImpl();
         u.setCompanyname(this.companyname);
         u.setName(this.name);
         u.setUsername(this.username);
-        u.setPassword(this.password);
+        u.setPassword(pass.generate( this.password.toCharArray()));
         u.setCityId(new City(this.cityId));
         u.setAddress(this.address);
         u.setEmail(this.email);

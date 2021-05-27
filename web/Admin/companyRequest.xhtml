@@ -598,7 +598,7 @@
                                     <li><a href="javascript:void(0);" class="btn btn-info" data-toggle="modal" data-target="#addcontact">Add New</a></li>
                                 </ul>
                             </div>
-
+                            <h:form>
                             <div class="body">
 
                                 <div class="table-responsive">
@@ -659,8 +659,11 @@
 
 
                                                 <td>
-                                                    <button type="button" class="btn btn-success"><i class="fa fa-check-circle"></i> <span>Accept</span></button>
-                                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> <span>Reject</span></button>
+                                                    <h:commandButton class="btn btn-success" action="#{adminManagedBean.updateRequest(true,company.userId.id)}" value="Accept"/>
+                                                    <h:commandButton class="btn btn-danger" action="#{adminManagedBean.updateRequest(false,company.userId.id)}" value="Reject"/>
+                                                    
+<!--                                                    <button type="button" class="btn btn-success"><i class="fa fa-check-circle"></i> <span>Accept</span></button>
+                                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> <span>Reject</span></button>-->
                                                 </td>
                                             </tr>
                                                 
@@ -670,6 +673,7 @@
                                     </table>
                                 </div>
                             </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>

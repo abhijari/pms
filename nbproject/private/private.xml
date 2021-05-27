@@ -3,7 +3,50 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/java/pms/web/Company/profile.xhtml</file>
+            <file>file:/E:/java/pms/src/java/entity/Technology.java</file>
+            <file>file:/E:/java/pms/src/java/entity/Usersgroup.java</file>
             <file>file:/E:/java/pms/src/java/JSFBean/UserManagedBean.java</file>
+            <file>file:/E:/java/pms/src/java/ejb/CompanySessionBeanLocal.java</file>
+            <file>file:/E:/java/pms/src/java/ejb/CompanySessionBean.java</file>
+            <file>file:/E:/java/pms/web/Student/companyDetail.xhtml</file>
+            <file>file:/E:/java/pms/src/java/entity/Groups.java</file>
+            <file>file:/E:/java/pms/src/java/JSFBean/LoginManagedBean.java</file>
+            <file>file:/E:/java/pms/web/Company/studentDetail.xhtml</file>
+            <file>file:/E:/java/pms/web/Admin/company.xhtml</file>
+            <file>file:/E:/java/pms/src/java/entity/Userstechnology.java</file>
+            <file>file:/E:/java/pms/src/java/Config/projectConfig.java</file>
+            <file>file:/E:/java/pms/web/assets/css/multi-selector.css</file>
+            <file>file:/E:/java/pms/web/Company/dashboard.xhtml</file>
+            <file>file:/E:/java/pms/web/login.xhtml</file>
+            <file>file:/E:/java/pms/web/Student/dashboard.xhtml</file>
+            <file>file:/E:/java/pms/src/java/entity/Skills.java</file>
+            <file>file:/E:/java/pms/web/signup.xhtml</file>
+            <file>file:/E:/java/pms/src/java/entity/User.java</file>
+            <file>file:/E:/java/pms/src/java/entity/Projects.java</file>
+            <file>file:/E:/java/pms/web/WEB-INF/beans.xml</file>
+            <file>file:/E:/java/pms/src/java/ejb/StudentSessionBean.java</file>
+            <file>file:/E:/java/pms/src/java/ejb/StudentSessionBeanLocal.java</file>
+            <file>file:/E:/java/pms/src/java/ejb/AdminSessionBean.java</file>
+            <file>file:/E:/java/pms/src/java/entity/Jobinerviews.java</file>
+            <file>file:/E:/java/pms/src/java/JSFBean/CompanyManagedBean.java</file>
+            <file>file:/E:/java/pms/web/Company/students.xhtml</file>
+            <file>file:/E:/java/pms/src/java/JSFBean/StudentManagedBean.java</file>
+            <file>file:/E:/java/pms/src/java/JSFBean/AdminManagedBean.java</file>
+            <file>file:/E:/java/pms/web/Company/interviews.xhtml</file>
+            <file>file:/E:/java/pms/web/Student/interview.xhtml</file>
+            <file>file:/E:/java/pms/web/Admin/companyRequest.xhtml</file>
+            <file>file:/E:/java/pms/src/java/entity/Requestinterviewdates.java</file>
+            <file>file:/E:/java/pms/src/java/ejb/UserSessionBeanLocal.java</file>
+            <file>file:/E:/java/pms/src/java/ejb/UserSessionBean.java</file>
+            <file>file:/E:/java/pms/src/java/entity/Educationdetail.java</file>
+            <file>file:/E:/java/pms/web/Student/profile.xhtml</file>
+            <file>file:/E:/java/pms/src/java/entity/Experiencedetail.java</file>
+            <file>file:/E:/java/pms/web/assets/js/jquery.multi-select.js</file>
+            <file>file:/E:/java/pms/web/Company/request.xhtml</file>
+            <file>file:/E:/java/pms/web/Student/company.xhtml</file>
+            <file>file:/E:/java/pms/web/Admin/students.xhtml</file>
+            <file>file:/E:/java/pms/src/java/ejb/AdminSessionBeanLocal.java</file>
         </group>
     </open-files>
 </project-private>

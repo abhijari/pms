@@ -21,4 +21,16 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <security-role>
+        <description/>
+        <role-name>Admin</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Company</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Student</role-name>
+    </security-role>
 </web-app>

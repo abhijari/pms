@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
 
         <title>:: Lucid HR :: Profile</title>
@@ -216,15 +218,17 @@
 
                                 <ul class="main-menu metismenu">
 
-                                    <li><a href="index.html"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
+                                   
+                                    
+                                    <li><a href="dashboard.xhtml"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
 
-                                    <li class="active"><a href="page-profile2.html"><i class="icon-user" /><span>Profile</span></a></li>
+                                    <li class="active" ><a href="profile.xhtml"><i class="icon-user" /><span>Profile</span></a></li>
 
-                                    <li> <a href="emp-all.html"><i class="icon-diamond" />Students</a></li>
+                                    <li> <a href="students.xhtml"><i class="icon-diamond" />Students</a></li>
 
-                                    <li> <a href="table-basic.html"><i class="icon-bell" />Requests</a></li>
+                                    <li> <a href="request.xhtml"><i class="icon-bell" />Requests</a></li>
 
-                                    <li> <a href="app-events.html"><i class="icon-users" />Interviews</a></li>
+                                    <li> <a href="interviews.xhtml"><i class="icon-users" />Interviews</a></li>
                                 </ul></nav></div>
                     </div>
                 </div>
@@ -258,44 +262,49 @@
                 <div class="row clearfix">
 
                     <div class="card">
+                    <h:form enctype="multipart/form-data">
 
                         <div class="header">
 
-                            <h2>Personal Information</h2>
+                            <h2>Personal Information
+                                <h:commandButton id="submit" action="#{companyManagedBean.updateProfile()}" value="Update" style="float:right" class="btn btn-primary"/>
+                            </h2>
                         </div>
 
                         <div class="body">
                             <small class="text-muted">Profile pic: </small>
                             <input type="file" id="dropify-event" data-default-file="" />
                             <small class="text-muted">Company name: </small>
-                            <input type="text" class="form-control" aria-label="name" aria-describedby="basic-addon1" id="sname" />
+                            <h:inputText value="#{companyManagedBean.companyname}" class="form-control" disabled="true"/>
+                            
+                             <small class="text-muted">Owner name: </small>
+                             <h:inputText value="#{companyManagedBean.name}" class="form-control" disabled="true"/>
+                            
                             <small class="text-muted">Company user name: </small>
-                            <input type="text" class="form-control" disabled="disabled" aria-label="username" aria-describedby="basic-addon1" id="suname" />
+                            <h:inputText value="#{companyManagedBean.username}" class="form-control" disabled="true"/>
                             <small class="text-muted">Company address: </small>
-                            <textarea class="form-control" rows="5" cols="30" required="">795 Folsom Ave, Suite 600 San Francisco, 94107</textarea>
+                            <h:inputTextarea rows="5" value="#{companyManagedBean.address}" class="form-control"/>
 
                             <hr />
                             <small class="text-muted">Company email: </small>
-                            <input type="email" class="form-control" required="" disabled="disabled" />
+                            <h:inputText value="#{companyManagedBean.email}" class="form-control" disabled="true"/>
 
                             <hr />
                             <small class="text-muted">Mobile: </small>
-                            <input type="number" class="form-control" required="" />
+                            <h:inputText value="#{companyManagedBean.contact}" class="form-control" disabled="true"/>
 
-                            <hr />
-                            <small class="text-muted">Date of establishment: </small>
-                            <input type="text" class="form-control" id="datepicker" />
+                         
 
                             <hr />
                             <small class="text-muted">Description: </small>
-                            <textarea class="form-control" rows="5" cols="30" required="" placeholder="About your company..." />
+                            <h:inputTextarea rows="5" value="#{companyManagedBean.description}" class="form-control"/>
 
                             <hr />
                             <small class="text-muted">Social: </small>
 
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-linkedin  m-r-5" /></span>
-                                <input type="text" class="form-control" required="" placeholder=" linkedin.com/example" />
+                                <h:inputText value="#{companyManagedBean.linkedinLink}" class="form-control"/>
                             </div>
                             <!-- <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-github  m-r-5"></i></span>
@@ -304,23 +313,25 @@
 
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-globe  m-r-5" /></span>
-                                <input type="text" class="form-control" required="" placeholder=" website.com/example" />
+                                <h:inputText value="#{companyManagedBean.websiteLink}" class="form-control"/>
                             </div>
                         </div>
+                    </h:form>
                     </div>
 
                     <div class="card">
-
+                        <h:form>
                         <div class="header">
 
                             <h2>Technologies</h2>
+                           <h:commandButton id="submit" action="#{companyManagedBean.saveTechnology()}" value="Save" class="btn btn-primary"/>
+
                         </div>
-                        <form id="basic-form" method="post" novalidate="">
 
                             <div class="form-group">
 
                                 <div class="body" id="dynamic_form">
-                                    <select id="tech" name="tech[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required="" data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-multiselect">
+<!--                                    <select id="tech" name="tech[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required="" data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-multiselect">
 
                                         <option value="cheese">Cheese</option>
 
@@ -333,10 +344,16 @@
                                         <option value="pepperoni">Pepperoni</option>
 
                                         <option value="onions">Onions</option>
-                                    </select>
+                                    </select>-->
+
+                                    <h:selectManyCheckbox value = "#{companyManagedBean.userTechnologies}">
+                                        <c:forEach var="tech" items="#{companyManagedBean.allTechnology()}">
+                                            <f:selectItem itemValue = "#{tech.id}" itemLabel = "#{tech.name}" />
+                                        </c:forEach>
+                                    </h:selectManyCheckbox>
                                 </div>
                             </div>
-                        </form>
+                        </h:form>
                     </div>
                 </div>
 

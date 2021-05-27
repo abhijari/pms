@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
 
         <title>:: Lucid HR :: Home</title>
@@ -196,15 +197,17 @@
 
                                 <ul class="main-menu metismenu">
 
-                                    <li><a href="index.html"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
+                          
+                                     <li><a href="dashboard.xhtml"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
 
-                                    <li><a href="page-profile2.html"><i class="icon-user" /><span>Profile</span></a></li>
+                                    <li  ><a href="profile.xhtml"><i class="icon-user" /><span>Profile</span></a></li>
 
-                                    <li class="active"> <a href="emp-all.html"><i class="icon-diamond" />Students</a></li>
+                                    <li class="active"> <a href="students.xhtml"><i class="icon-diamond" />Students</a></li>
 
-                                    <li> <a href="table-basic.html"><i class="icon-bell" />Requests</a></li>
+                                    <li > <a href="request.xhtml"><i class="icon-bell" />Requests</a></li>
 
-                                    <li> <a href="app-events.html"><i class="icon-users" />Interviews</a></li>
+                                    <li> <a href="interviews.xhtml"><i class="icon-users" />Interviews</a></li>
+                                        
                                 </ul></nav></div>
                     </div>
                 </div>
@@ -254,7 +257,7 @@
                             <div class="body">
 
                                 <div class="table-responsive">
-
+                                    <h:form>
                                     <table class="table table-hover js-basic-example dataTable table-custom table-striped m-b-0 c_list">
                                         <thead class="thead-dark">
 
@@ -269,20 +272,16 @@
 
                                                 <th>Name</th>
 
-                                                <th>Employee ID</th>
+                                                <th>Student ID</th>
 
-                                                <th>Phone</th>
-
-                                                <th>Join Date</th>
-
-                                                <th>Role</th>
+                                                <th>linkedinLink</th>
+                                                
 
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
-
+                                            <c:forEach items="#{companyManagedBean.allStudents()}" var="student">
                                             <tr>
 
                                                 <td class="width45">
@@ -295,355 +294,25 @@
 
                                                 <td>
 
-                                                    <h6 class="mb-0">Marshall Nichols</h6>
-                                                    <span>marshall-n@gmail.com</span>
+                                                    <h6 class="mb-0">#{student.userId.name}</h6>
+                                                    <span>#{student.userId.email}</span>
                                                 </td>
 
-                                                <td><span>LA-0215</span></td>
+                                                <td><span>121321321321</span></td>
 
-                                                <td><span>+ 264-625-2583</span></td>
+                                                <td><span>#{student.userId.linkedinLink}</span></td>
 
-                                                <td>24 Jun, 2015</td>
-
-                                                <td>Web Designer</td>
+                                               
 
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
+                                                    <h:commandButton action="#{companyManagedBean.viewStudDetail(student.userId.id)}" value="View" class="btn btn-primary"/>
                                                 </td>
                                             </tr>
 
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar2.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Susie Willis</h6>
-                                                    <span>sussie-w@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0216</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>28 Jun, 2015</td>
-
-                                                <td>Web Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar3.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Debra Stewart</h6>
-                                                    <span>debra@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0218</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>21 July, 2015</td>
-
-                                                <td>Web Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar4.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Francisco Vasquez</h6>
-                                                    <span>francis-v@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0222</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>18 Jan, 2016</td>
-
-                                                <td>Team Leader</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar5.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Jane Hunt</h6>
-                                                    <span>jane-hunt@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0232</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>08 Mar, 2016</td>
-
-                                                <td>Android Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar6.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Darryl Day</h6>
-                                                    <span>darryl.day@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0233</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>13 Nov, 2016</td>
-
-                                                <td>IOS Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar1.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Marshall Nichols</h6>
-                                                    <span>marshall-n@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0215</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>24 Jun, 2015</td>
-
-                                                <td>Web Designer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar2.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Susie Willis</h6>
-                                                    <span>sussie-w@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0216</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>28 Jun, 2015</td>
-
-                                                <td>Web Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar3.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Debra Stewart</h6>
-                                                    <span>debra@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0218</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>21 July, 2015</td>
-
-                                                <td>Web Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar4.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Francisco Vasquez</h6>
-                                                    <span>francis-v@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0222</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>18 Jan, 2016</td>
-
-                                                <td>Team Leader</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar5.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Jane Hunt</h6>
-                                                    <span>jane-hunt@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0232</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>08 Mar, 2016</td>
-
-                                                <td>Android Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="width45">
-                                                    <label class="fancy-checkbox">
-                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" />
-                                                        <span />
-                                                    </label>
-                                                    <img src="../assets/images/xs/avatar6.jpg" class="rounded-circle avatar" alt="" />
-                                                </td>
-
-                                                <td>
-
-                                                    <h6 class="mb-0">Darryl Day</h6>
-                                                    <span>darryl.day@gmail.com</span>
-                                                </td>
-
-                                                <td><span>LA-0233</span></td>
-
-                                                <td><span>+ 264-625-2583</span></td>
-
-                                                <td>13 Nov, 2016</td>
-
-                                                <td>IOS Developer</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit" /></button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o" /></button>
-                                                </td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>

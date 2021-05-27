@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
         <title>:: Lucid HR :: Home</title>
         <meta charset="utf-8" />
@@ -186,13 +187,13 @@
 
                                 <ul class="main-menu metismenu">
 
-                                    <li><a href="index.html"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
+                                    <li><a href="dashboard.xhtml"><i class="icon-speedometer" /><span>Dashboard</span></a></li>
 
-                                    <li><a href="page-profile2.html"><i class="icon-user" /><span>Profile</span></a></li>
+                                    <li><a href="profile.xhtml"><i class="icon-user" /><span>Profile</span></a></li>
 
-                                    <li class="active"> <a href="client-list.html"><i class="icon-diamond" />Companies</a></li>
+                                    <li class="active"> <a href="company.xhtml"><i class="icon-diamond" />Companies</a></li>
 
-                                    <li> <a href="emp-all.html"><i class="icon-users" />Interviews</a></li>                           
+                                    <li> <a href="interview.xhtml"><i class="icon-users" />Interviews</a></li>                           
                                 </ul></nav></div>
                     </div>             
                 </div>          
@@ -205,249 +206,40 @@
 
                 <div class="block-header">
 
-
+                        <h:form>
                     <div class="row clearfix">
-
+                        <c:forEach items="#{studentManagedBean.allCompanies()}" var="company">
                         <div class="col-lg-3 col-md-6 col-sm-12">
 
                             <div class="card">
 
                                 <div class="body text-center">
 
-                                    <div class="chart easy-pie-chart-1" data-percent="75"> <span><img src="../assets/images/sm/avatar1.jpg" alt="user" class="rounded-circle" /></span> </div>
+                                    <div class="chart easy-pie-chart-1" data-percent="100"> <span><img src="../assets/images/sm/avatar1.jpg" alt="user" class="rounded-circle" /></span> </div>
 
-                                    <h5>John Smith</h5>
+                                    <h5>#{company.userId.companyname}</h5>
                                     <small>CEO</small>
 
-                                    <h6>vPro Infoweb LLC.</h6>
+                                    <h6>#{company.userId.name}</h6>
 
                                     <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
+                                        <h:commandButton action="#{studentManagedBean.companyDetail(company.userId.id)}" value="View Profile" class="btn btn-sm btn-primary"/>
+
                                     </div>
 
                                     <ul class="social-links list-unstyled">
 
-                                        <li><a title="facebook" href="javascript:void(0);"><i class="fa fa-facebook" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="instagram" href="javascript:void(0);"><i class="fa fa-instagram" /></a></li>
+                                        <li> <a title="Twitter" href="javascript:void(0);"><i class="icon-globe"></i></a></li>
+                                        <li> <a title="Twitter" href="javascript:void(0);"><i class="fa fa-linkedin-square"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-
-                            <div class="card">
-
-                                <div class="body text-center">
-
-                                    <div class="chart easy-pie-chart-1" data-percent="67"> <span><img src="../assets/images/sm/avatar2.jpg" alt="user" class="rounded-circle" /></span> </div>
-
-                                    <h5>Hossein Shams</h5>
-                                    <small>CEO</small>
-
-                                    <h6>BT Technology</h6>
-
-                                    <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
-                                    </div>
-
-                                    <ul class="social-links list-unstyled">
-
-                                        <li><a title="google-plus" href="javascript:void(0);"><i class="fa fa-google-plus-box" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="linkedin" href="javascript:void(0);"><i class="fa fa-linkedin-box" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-
-                            <div class="card">
-
-                                <div class="body text-center">
-
-                                    <div class="chart easy-pie-chart-1" data-percent="23"> <span><img src="../assets/images/sm/avatar3.jpg" alt="user" class="rounded-circle" /></span> </div>
-
-                                    <h5>Maryam Amiri</h5>
-                                    <small>CEO</small>
-
-                                    <h6>Core Infoweb Pvt.</h6>
-
-                                    <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
-                                    </div>
-
-                                    <ul class="social-links list-unstyled">
-
-                                        <li><a title="facebook" href="javascript:void(0);"><i class="fa fa-facebook" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="instagram" href="javascript:void(0);"><i class="fa fa-instagram" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-
-                            <div class="card">
-
-                                <div class="body text-center">
-
-                                    <div class="chart easy-pie-chart-1" data-percent="49"> <span><img src="../assets/images/sm/avatar4.jpg" alt="user" class="rounded-circle" /></span> </div>
-
-                                    <h5>Tim Hank</h5>
-                                    <small>CEO</small>
-
-                                    <h6>AUR Tech LLC.</h6>
-
-                                    <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
-                                    </div>
-
-                                    <ul class="social-links list-unstyled">
-
-                                        <li><a title="linkedin" href="javascript:void(0);"><i class="fa fa-linkedin-box" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="instagram" href="javascript:void(0);"><i class="fa fa-instagram" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-
-                            <div class="card">
-
-                                <div class="body text-center">
-
-                                    <div class="chart easy-pie-chart-1" data-percent="75"> <span><img src="../assets/images/sm/avatar5.jpg" alt="user" class="rounded-circle" /></span> </div>
-
-                                    <h5>John Smith</h5>
-                                    <small>Manager</small>
-
-                                    <h6>WrapTheme Pvt.</h6>
-
-                                    <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
-                                    </div>
-
-                                    <ul class="social-links list-unstyled">
-
-                                        <li><a title="facebook" href="javascript:void(0);"><i class="fa fa-facebook" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="instagram" href="javascript:void(0);"><i class="fa fa-instagram" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-
-                            <div class="card">
-
-                                <div class="body text-center">
-
-                                    <div class="chart easy-pie-chart-1" data-percent="88"> <span><img src="../assets/images/sm/avatar1.jpg" alt="user" class="rounded-circle" /></span> </div>
-
-                                    <h5>Frank Camly</h5>
-                                    <small>CEO</small>
-
-                                    <h6>Carlson Software</h6>
-
-                                    <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
-                                    </div>
-
-                                    <ul class="social-links list-unstyled">
-
-                                        <li><a title="google-plus" href="javascript:void(0);"><i class="fa fa-google-plus-box" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="linkedin" href="javascript:void(0);"><i class="fa fa-linkedin-box" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-
-                            <div class="card">
-
-                                <div class="body text-center">
-
-                                    <div class="chart easy-pie-chart-1" data-percent="37"> <span><img src="../assets/images/sm/avatar2.jpg" alt="user" class="rounded-circle" /></span> </div>
-
-                                    <h5>Gary Camara</h5>
-                                    <small>Marketing Head</small>
-
-                                    <h6>Fly2 Infotech</h6>
-
-                                    <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
-                                    </div>
-
-                                    <ul class="social-links list-unstyled">
-
-                                        <li><a title="facebook" href="javascript:void(0);"><i class="fa fa-facebook" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="instagram" href="javascript:void(0);"><i class="fa fa-instagram" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-
-                            <div class="card">
-
-                                <div class="body text-center">
-
-                                    <div class="chart easy-pie-chart-1" data-percent="75"> <span><img src="../assets/images/sm/avatar5.jpg" alt="user" class="rounded-circle" /></span> </div>
-
-                                    <h5>John Smith</h5>
-                                    <small>Manager</small>
-
-                                    <h6>WrapTheme Pvt.</h6>
-
-                                    <div class="m-t-15">
-                                        <button class="btn btn-sm btn-primary">View Profile</button>
-                                        <button class="btn btn-sm btn-success">Message</button>
-                                    </div>
-
-                                    <ul class="social-links list-unstyled">
-
-                                        <li><a title="facebook" href="javascript:void(0);"><i class="fa fa-facebook" /></a></li>
-
-                                        <li><a title="twitter" href="javascript:void(0);"><i class="fa fa-twitter" /></a></li>
-
-                                        <li><a title="instagram" href="javascript:void(0);"><i class="fa fa-instagram" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
+                   </h:form>
+
                 </div>
             </div>
 
